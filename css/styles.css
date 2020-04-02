@@ -10,6 +10,10 @@
 
 
 /* ---- Base Rules ---- */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background: rgb(136,203,171);
     background: linear-gradient(0deg, rgba(136,203,171,1) 0%, rgba(0,13,60,1) 100%);
@@ -58,6 +62,7 @@ main {
 section {
     position: relative;
     min-height: 80vh;
+
 }
 
 
@@ -65,9 +70,16 @@ section {
 
 /* Navigation Styles*/
 .navbar__menu ul {
-    padding-left: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    height: 50px;
+    width: 100vw;
+    padding-left: 10px;
     margin: 0;
     text-align: right;
+    background-color: #000;
 }
 
 .navbar__menu li {
@@ -79,12 +91,12 @@ section {
     padding: 1em;
     font-weight: bold;
     text-decoration: none;
-    color: #000;
+    color: #fff;
 }
 
 .navbar__menu .menu__link:hover {
     background: #333;
-    color: #fff;
+    color: rgb(179, 167, 3);
     transition: ease 0.3s all;
 }
 
@@ -192,18 +204,23 @@ section:nth-of-type(3n + 1) .landing__container::after {
 
 /* ---- Theme State Rules ---- */
 /* Section Active Styles */
-/* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
-section.your-active-class {
+/* Note: active-section class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
+
+
+section.active-section {
     background: rgb(0, 0, 0);
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
 }
+.active-section {
+    border-left: dotted 2px #cc1;
+}
 
-section.your-active-class .landing__container::before {
+section.active-section .landing__container::before {
     opacity: 1;
     animation: rotate 4s linear 0s infinite forwards;
 }
 
-section.your-active-class .landing__container::after {
+section.active-section .landing__container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
 }
