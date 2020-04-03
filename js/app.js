@@ -19,12 +19,22 @@
 */
 const navBarList = document.querySelector("#navbar__list")
 const sections = document.getElementsByTagName('section')
+
+
 /**
  * End Global Variables
  * Start Helper Functions
  *
 */
 //returns a link with a nav element inside it based on section name and id
+const setNav = () => {
+    for(let i = 0; i < sections.length; i++) {
+        let sectionId = sections[i].getAttribute("id")
+        let sectionName = sections[i].getAttribute("data-nav")
+        navBarList.appendChild(createNavElement(sectionName, sectionId))
+    }
+}
+
 const createNavElement = (sectionName, sectionId) => {
     let element = document.createElement('li')
     let link = document.createElement('a')
@@ -36,6 +46,33 @@ const createNavElement = (sectionName, sectionId) => {
     return link
 }
 
+// NoteInteraction observer is not supported by IE. The rubric item clearly states all features should be usable across modern browsers. IE is not a modern browser ʘ‿ʘ .
+let setActiveOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: [0.75, 1]
+  }
+
+const setActiveSection = (entries, observer) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting) {
+            entry.target.classList.add('active-section')
+        } else {
+            entry.target.classList.remove('active-section')
+        }
+  })
+};
+let observer = new IntersectionObserver(setActiveSection, setActiveOptions);
+
+
+const setObservers = () => {
+    //iterate through sections and place observers on each one
+    for(let i = 0; i < sections.length; i++) {
+        let sectionId = sections[i].getAttribute("id")
+        let target = document.querySelector(`#${sectionId}`);
+        observer.observe(target);
+    }
+}
 
 
 /**
@@ -44,20 +81,8 @@ const createNavElement = (sectionName, sectionId) => {
  *
 */
 
-// build the nav
-const setNav = () => {
-    for(let i = 0; i < sections.length; i++) {
-        let sectionId = sections[i].getAttribute("id")
-        let sectionName = sections[i].getAttribute("data-nav")
-        navBarList.appendChild(createNavElement(sectionName, sectionId))
-    }
-}
-
 // Add class 'active' to section when near top of viewport
-
-
-// Scroll to anchor ID using scrollTO event
-
+setObservers()
 
 /**
  * End Main Functions
@@ -68,6 +93,3 @@ const setNav = () => {
 // Build menu
 document.addEventListener('DOMContentLoaded', setNav)
 
-// Scroll to section on link click
-
-// Set sections as active

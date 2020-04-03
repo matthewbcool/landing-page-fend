@@ -212,7 +212,11 @@ section.active-section {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 .active-section {
-    border-left: dotted 2px #cc1;
+    border-left: dotted 10px #cc1;
+    border-right: dotted 10px #cc1;
+    margin-left: -10px;
+    margin-right: -10px;
+    transition: 0.3s
 }
 
 section.active-section .landing__container::before {
