@@ -84,6 +84,7 @@ section {
 
 .navbar__menu li {
     display: inline-block;
+    user-select: none;
 }
 
 .navbar__menu .menu__link {
